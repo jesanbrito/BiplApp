@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BiplApp</string>
+    <string name="txt_inicio_sesion">Iniciar Sesión</string>
+    <string name="txt_hint_email">Escriba su Email</string>
+    <string name="txt_hint_password">Escriba su contraseña</string>
+    <string name="txt_crear_cuenta">Crear cuenta</string>
+</resources>
