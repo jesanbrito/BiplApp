@@ -3,8 +3,11 @@ package co.edu.unab.tas.ejuab.biplapp.view.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import co.edu.unab.tas.ejuab.biplapp.R;
 import co.edu.unab.tas.ejuab.biplapp.databinding.ActivityMainBinding;
@@ -16,15 +19,47 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mainBinding;
 
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       
+
         mainBinding = DataBindingUtil.setContentView(MainActivity.this, R.layout.activity_main);
+
+        //mainBinding.setEmail("jesus@correo.com");
+        //mainBinding.setPassword("123456");
+
+        mainBinding.btLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String email = mainBinding.getEmail();
+                String pass = mainBinding.getPassword();
+
+
+                if(email.equals("jesus@correo.com")&&pass.equals("123456")){
+                    Toast.makeText(MainActivity.this, "Bienvenido...", Toast.LENGTH_LONG).show();
+
+                    //Intent myIntent = new Intent(MainActivity.this, ProductListActivity.class);
+                    //Intent myIntent = new Intent(MainActivity.this, MenuActivity.class);
+                    //startActivity(myIntent);
+
+                }else{
+                    Toast.makeText(MainActivity.this, "Datos errados...", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+
+        mainBinding.btRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(myIntent);
+
+            }
+        });
+
 
 
     }

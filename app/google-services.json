@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "572376239626",
+    "project_id": "biplapp-tads",
+    "storage_bucket": "biplapp-tads.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:572376239626:android:685bd5081d451a8dc419f3",
+        "android_client_info": {
+          "package_name": "co.edu.unab.tas.ejuab.biplapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "572376239626-l2afdulr8io5ll0ei72bmfc1gi1uikh2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEHsfHG6M6vYruDY7LLZ2S89cgFsuXcfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "572376239626-l2afdulr8io5ll0ei72bmfc1gi1uikh2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
