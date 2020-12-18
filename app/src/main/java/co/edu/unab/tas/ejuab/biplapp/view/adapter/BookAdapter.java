@@ -1,4 +1,4 @@
-package co.edu.unab.tas.ejuab.biplapp.view.activity.adapter;
+package co.edu.unab.tas.ejuab.biplapp.view.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

@@ -39,9 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 if(email.equals("jesus@correo.com")&&pass.equals("123456")){
                     Toast.makeText(MainActivity.this, "Bienvenido...", Toast.LENGTH_LONG).show();
 
-                    //Intent myIntent = new Intent(MainActivity.this, ProductListActivity.class);
-                    //Intent myIntent = new Intent(MainActivity.this, MenuActivity.class);
-                    //startActivity(myIntent);
+                    Intent myIntent = new Intent(MainActivity.this, ActivityBookList.class);
+                    startActivity(myIntent);
 
                 }else{
                     Toast.makeText(MainActivity.this, "Datos errados...", Toast.LENGTH_LONG).show();
