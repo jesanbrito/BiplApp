@@ -4,4 +4,5 @@
     <string name="txt_hint_email">Escriba su Email</string>
     <string name="txt_hint_password">Escriba su contraseña</string>
     <string name="txt_crear_cuenta">Crear cuenta</string>
+    <string name="txt_nombre_app">Biblioteca Pública</string>
 </resources>
