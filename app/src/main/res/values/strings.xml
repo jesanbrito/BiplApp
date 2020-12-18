@@ -5,4 +5,5 @@
     <string name="txt_hint_password">Escriba su contraseña</string>
     <string name="txt_crear_cuenta">Crear cuenta</string>
     <string name="txt_nombre_app">Biblioteca Pública</string>
+    <string name="txt_add_book">Agregar Libro</string>
 </resources>

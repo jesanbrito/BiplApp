@@ -5,14 +5,16 @@ public class Book {
     private String title;
     private String author;
     private String editorial;
-    private Integer state;
+    private String cover;
+    private Integer status;
 
-    public Book(Integer id, String title, String author, String editorial, Integer state) {
-        this.id = id;
+    public Book(String title, String author, String editorial, String cover, Integer status) {
+        this.id = 0;
         this.title = title;
         this.author = author;
         this.editorial = editorial;
-        this.state = state;
+        this.cover = cover;
+        this.status = status;
     }
 
     public Book() {
@@ -20,7 +22,8 @@ public class Book {
         this.title = "";
         this.author = "";
         this.editorial = "";
-        this.state = 1;
+        this.cover = "";
+        this.status = 1;
     }
 
     public Integer getId() {
@@ -55,12 +58,20 @@ public class Book {
         this.editorial = editorial;
     }
 
-    public Integer getState() {
-        return state;
+    public String getCover() {
+        return cover;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Override
@@ -70,7 +81,7 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", editorial='" + editorial + '\'' +
-                ", state=" + state +
+                ", status=" + status +
                 '}';
     }
 }
