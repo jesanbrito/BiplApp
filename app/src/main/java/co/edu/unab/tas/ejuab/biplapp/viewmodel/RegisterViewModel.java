@@ -24,7 +24,6 @@ public class RegisterViewModel extends AndroidViewModel {
     }
 
     public void singUp(User myUser, String pass){
-
         userRepository.singUp(myUser, pass);
     }
 }
