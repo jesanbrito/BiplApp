@@ -1,9 +1,15 @@
 package co.edu.unab.tas.ejuab.biplapp.view.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -17,6 +23,30 @@ public class ActivityBookList extends AppCompatActivity {
     private ArrayList<Book> bookList;
     private BookAdapter adapter;
     private ActivityBookListBinding bookListBinding;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_general, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mi_add_book:
+                /*Intent in =  new Intent(ProductListActivity.this,CartActivity.class);
+                startActivity(in);*/
+                break;
+            case R.id.mi_close_session:
+               /* FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.signOut();
+                Intent i =  new Intent(ProductListActivity.this,MainActivity.class);
+                startActivity(i);
+                finish();*/
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
