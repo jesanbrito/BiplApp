@@ -15,14 +15,16 @@ public class RegisterViewModel extends AndroidViewModel {
 
     public RegisterViewModel(@NonNull Application application) {
         super(application);
-       // userRepository = new UserRepository(application);
+        userRepository = new UserRepository(application);
     }
 
     public LiveData<User> getCurrentUser(){
+
         return userRepository.getCurrentUser();
     }
 
     public void singUp(User myUser, String pass){
+
         userRepository.singUp(myUser, pass);
     }
 }

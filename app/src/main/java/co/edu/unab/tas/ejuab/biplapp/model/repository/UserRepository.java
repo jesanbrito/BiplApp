@@ -24,12 +24,14 @@ public class UserRepository {
 
     public UserRepository(Context context){
 
+        auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         currentUser = new MutableLiveData<>();
 
     }
 
     public LiveData<User> getCurrentUser() {
+
         return currentUser;
     }
 

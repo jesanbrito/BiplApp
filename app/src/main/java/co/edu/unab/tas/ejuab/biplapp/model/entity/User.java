@@ -11,7 +11,7 @@ public class User {
     private String status;
 
     public User(String id, String typeDocument, String document, String name, String lastName, String email, String phone, String status) {
-        this.id = id;
+        this.id = "";
         this.typeDocument = typeDocument;
         this.document = document;
         this.name = name;
