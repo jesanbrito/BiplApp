@@ -10,4 +10,5 @@
     <string name="txt_hint_identificacion_usuario">Escriba su documento</string>
     <string name="txt_hint_correo_usuario">Escrbia su email</string>
     <string name="txt_hint_pass_usuario">Escriba su contraseña</string>
+    <string name="txt_agregar_usuario">Agregar Usuario</string>
 </resources>
