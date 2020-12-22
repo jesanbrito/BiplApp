@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import co.edu.unab.tas.ejuab.biplapp.R;
@@ -29,8 +30,14 @@ public class RegisterActivity extends AppCompatActivity {
         registerBinding.btRegisterForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 User myUser = registerBinding.getUser();
                 String pass = registerBinding.getPassword();
+                myUser.setStatus("Habilitado");
+
+                Log.e("variables", myUser.getEmail() + " " + pass);
+
+                viewModel.singUp(myUser, pass);
 
                 viewModel.getCurrentUser().observe(RegisterActivity.this, new Observer<User>() {
                     @Override

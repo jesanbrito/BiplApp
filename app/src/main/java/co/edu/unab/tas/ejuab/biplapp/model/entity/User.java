@@ -1,8 +1,9 @@
 package co.edu.unab.tas.ejuab.biplapp.model.entity;
 
+import com.google.firebase.firestore.Exclude;
+
 public class User {
-    private String id;
-    private String typeDocument;
+    private String uid;
     private String document;
     private String name;
     private String lastName;
@@ -10,9 +11,8 @@ public class User {
     private String phone;
     private String status;
 
-    public User(String id, String typeDocument, String document, String name, String lastName, String email, String phone, String status) {
-        this.id = "";
-        this.typeDocument = typeDocument;
+    public User(String uid, String typeDocument, String document, String name, String lastName, String email, String phone, String status) {
+        this.uid = "";
         this.document = document;
         this.name = name;
         this.lastName = lastName;
@@ -22,8 +22,7 @@ public class User {
     }
 
     public User() {
-        this.id = "";
-        this.typeDocument = "";
+        this.uid = "";
         this.document = "";
         this.name = "";
         this.lastName = "";
@@ -32,20 +31,15 @@ public class User {
         this.status = "";
     }
 
-    public String getId() {
-        return id;
+    @Exclude
+    public String getUid() {
+        return uid;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    @Exclude
+    public void setUid(String uid) {
 
-    public String getTypeDocument() {
-        return typeDocument;
-    }
-
-    public void setTypeDocument(String typeDocument) {
-        this.typeDocument = typeDocument;
+        this.uid = uid;
     }
 
     public String getDocument() {

@@ -44,7 +44,7 @@ public class UserRepository {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                myUser.setId(auth.getUid());
+                                myUser.setUid(auth.getUid());
                                 currentUser.setValue(myUser);
 
                             }else{
