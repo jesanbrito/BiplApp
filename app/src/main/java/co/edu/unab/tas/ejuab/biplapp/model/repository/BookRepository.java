@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -13,8 +14,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,18 +29,41 @@ import co.edu.unab.tas.ejuab.biplapp.model.entity.Book;
 
 public class BookRepository {
 
+    private static final String IMAGE_DIRECTORY = "image";
     private static final String BOOK_COLLECTION = "books";
     private MutableLiveData<List<Book>> bookList;
     private FirebaseFirestore firestore;
+    private StorageReference reference;
 
     public BookRepository(Context context) {
         bookList = new MutableLiveData<>();
         firestore = FirebaseFirestore.getInstance();
-        loadBooks();
+        reference = FirebaseStorage.getInstance().getReference();
+        listenBooks();
     }
 
     public LiveData<List<Book>> getBooks()  {
         return bookList;
+    }
+
+    public void listenBooks() {
+        firestore.collection(BOOK_COLLECTION).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error == null) {
+                    List<Book> list = new ArrayList<>();
+                    for(DocumentSnapshot item: value.getDocuments()) {
+                        Book book  = item.toObject(Book.class);
+                        book.setBid(item.getId());
+                        list.add(book);
+                        bookList.setValue(list);
+                    }
+                    bookList.setValue(list);
+                } else {
+                    Log.e("firestore - Listen*", error.getMessage());
+                }
+            }
+        });
     }
 
     public void loadBooks() {
@@ -56,7 +85,37 @@ public class BookRepository {
         });
     }
 
-    public void addBook(Book book) {
+    public void addBook(Book book, Uri imageUri) {
+        if (imageUri != null) {
+            String image = imageUri.toString().substring(imageUri.toString().lastIndexOf("/"));
+            StorageReference myImage = reference.child(IMAGE_DIRECTORY + "/" + image);
+            myImage.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        task.getResult().getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if (task.isSuccessful()) {
+                                    String url = task.getResult().toString();
+                                    book.setCover(url);
+                                    firestore.collection(BOOK_COLLECTION).add(book).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("Add-Book", "Libro Creado con Exito!!");
+                                            } else {
+                                                Log.e("Add-Book-Err", task.getException().getMessage());
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
             firestore.collection(BOOK_COLLECTION).add(book).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -68,4 +127,5 @@ public class BookRepository {
                 }
             });
         }
+    }
 }

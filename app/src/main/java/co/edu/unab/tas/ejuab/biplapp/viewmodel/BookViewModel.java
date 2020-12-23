@@ -1,6 +1,7 @@
 package co.edu.unab.tas.ejuab.biplapp.viewmodel;
 
 import android.app.Application;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -21,7 +22,7 @@ public class BookViewModel extends AndroidViewModel {
         bookRepository.loadBooks();
     }
 
-    public void addBook(Book book) {
-        bookRepository.addBook(book);
+    public void addBook(Book book, Uri image) {
+        bookRepository.addBook(book,image);
     }
 }
