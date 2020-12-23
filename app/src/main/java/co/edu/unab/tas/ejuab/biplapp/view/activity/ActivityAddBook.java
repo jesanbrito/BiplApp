@@ -46,6 +46,7 @@ public class ActivityAddBook extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         BookViewModel viewModel = new ViewModelProvider(ActivityAddBook.this).get(BookViewModel.class);
+        Book myBook  = (Book) getIntent().getSerializableExtra("book");
         activityAddBookBinding = DataBindingUtil.setContentView(ActivityAddBook.this, R.layout.activity_add_book);
 
         String[] textCategory = getResources().getStringArray(R.array.categorys);

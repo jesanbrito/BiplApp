@@ -38,15 +38,19 @@ public class ActivityBookList extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.mi_add_book:
-                Intent in =  new Intent(ActivityBookList.this,ActivityAddBook.class);
-                startActivity(in);
+               /* Intent in =  new Intent(ActivityBookList.this,ActivityAddBook.class);
+                startActivity(in);*/
+                break;
+            case R.id.mi_list_book:
+                Intent inAdmin =  new Intent(ActivityBookList.this,ActivityBookListAdmin.class);
+                startActivity(inAdmin);
                 break;
             case R.id.mi_close_session:
-               /* FirebaseAuth auth = FirebaseAuth.getInstance();
+                FirebaseAuth auth = FirebaseAuth.getInstance();
                 auth.signOut();
-                Intent i =  new Intent(ProductListActivity.this,MainActivity.class);
+                Intent i =  new Intent(ActivityBookList.this,MainActivity.class);
                 startActivity(i);
-                finish();*/
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
