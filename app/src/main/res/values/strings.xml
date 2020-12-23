@@ -12,4 +12,9 @@
     <string name="txt_hint_pass_usuario">Escriba su contraseña</string>
     <string name="txt_agregar_usuario">Agregar Usuario</string>
     <string name="txt_hint_telefono_usuario">Escriba el Teléfono</string>
+    <string name="txt_hint_title">Titulo del Libro</string>
+    <string name="txt_hint_author">Autor</string>
+    <string name="txt_hint_editorial">Editorial</string>
+    <string name="txt_hint_category">Categoria</string>
+    <string name="txt_add_book">Registrar Libro</string>
 </resources>
