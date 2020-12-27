@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categorys">
+        <item>Generalidades</item>
+        <item>Filosofía y Psicología</item>
+        <item>Religión</item>
+        <item>Ciencias Sociales</item>
+        <item>Lenguas</item>
+        <item>Matematicas y Ciencias Naturales</item>
+        <item>Tecnología y Ciencias Aplicadas</item>
+        <item>Arte</item>
+        <item>Literatura</item>
+        <item>Historia y Geografia</item>
+    </string-array>
+</resources>

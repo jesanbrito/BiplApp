@@ -16,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import co.edu.unab.tas.ejuab.biplapp.model.entity.User;
 
-public class UserRepository {
+public class   UserRepository {
 
     public static final String USER_COLLECTION = "users";
     private FirebaseAuth auth;
@@ -24,15 +24,12 @@ public class UserRepository {
     private MutableLiveData<User> currentUser;
 
     public UserRepository(Context context){
-
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         currentUser = new MutableLiveData<>();
-
     }
 
     public LiveData<User> getCurrentUser() {
-
         return currentUser;
     }
 
@@ -47,7 +44,6 @@ public class UserRepository {
                             if(task.isSuccessful()){
                                 myUser.setUid(auth.getUid());
                                 currentUser.setValue(myUser);
-
                             }else{
                                 Log.e("signup", task.getException().getMessage());
                             }
@@ -77,7 +73,6 @@ public class UserRepository {
                             } else {
                                 Log.e("signin",task.getException().getMessage());
                             }
-
                         }
                     });
                 } else {
@@ -86,6 +81,4 @@ public class UserRepository {
             }
         });
     }
-
-
 }

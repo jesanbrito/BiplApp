@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data> </data>
+    <data>
+        <variable name="viewModel" type="co.edu.unab.tas.ejuab.biplapp.viewmodel.BookListViewModel" />
+    </data>
 
     <ScrollView
         android:layout_width="match_parent"

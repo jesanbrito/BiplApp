@@ -1,37 +1,47 @@
 package co.edu.unab.tas.ejuab.biplapp.model.entity;
 
+import android.view.ViewDebug;
+
+import com.google.firebase.firestore.Exclude;
+
 public class Book {
-    private Integer id;
+    private String bid;
     private String title;
     private String author;
     private String editorial;
+    private String category;
     private String cover;
     private Integer status;
 
-    public Book(String title, String author, String editorial, String cover, Integer status) {
-        this.id = 0;
+
+    public Book(String title, String author, String editorial, String category,String cover, Integer status) {
+        this.bid = "";
         this.title = title;
         this.author = author;
         this.editorial = editorial;
+        this.category = category;
         this.cover = cover;
         this.status = status;
     }
 
     public Book() {
-        this.id = 0;
+        this.bid = "";
         this.title = "";
         this.author = "";
         this.editorial = "";
+        this.category = "";
         this.cover = "";
         this.status = 1;
     }
 
-    public Integer getId() {
-        return id;
+    @Exclude
+    public String getBid() {
+        return bid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    @Exclude
+    public void setBid(String bid) {
+        this.bid = bid;
     }
 
     public String getTitle() {
@@ -58,6 +68,14 @@ public class Book {
         this.editorial = editorial;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String getCover() {
         return cover;
     }
@@ -77,10 +95,12 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
+                "bid='" + bid + '\'' +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", editorial='" + editorial + '\'' +
+                ", category='" + category + '\'' +
+                ", cover='" + cover + '\'' +
                 ", status=" + status +
                 '}';
     }

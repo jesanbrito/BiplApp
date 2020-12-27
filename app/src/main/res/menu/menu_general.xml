@@ -3,11 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/mi_peril"
-        android:title="Editar Perfil" />
+        android:id="@+id/mi_list_book"
+        android:title="Administrar Libros" />
     <item
         android:id="@+id/mi_add_book"
         android:title="Crear Libros" />
+
+    <item
+        android:id="@+id/mi_peril"
+        android:title="Editar Perfil" />
+
     <item
         android:id="@+id/mi_close_session"
         android:title="Cerrar Sesión" />
