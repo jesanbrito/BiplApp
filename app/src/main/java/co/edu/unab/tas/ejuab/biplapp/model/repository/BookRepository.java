@@ -34,11 +34,13 @@ public class BookRepository {
     private MutableLiveData<List<Book>> bookList;
     private FirebaseFirestore firestore;
     private StorageReference reference;
+    private MutableLiveData<Boolean> ready;
 
     public BookRepository(Context context) {
         bookList = new MutableLiveData<>();
         firestore = FirebaseFirestore.getInstance();
         reference = FirebaseStorage.getInstance().getReference();
+        ready = new MutableLiveData<>();
         listenBooks();
     }
 
@@ -120,12 +122,70 @@ public class BookRepository {
                 @Override
                 public void onComplete(@NonNull Task<DocumentReference> task) {
                     if (task.isSuccessful()) {
-                        Log.d("Add-Book", "Libro Creado con Exito!!");
+                        Log.d("AddBookExit", "Libro Creado con Exito!!");
                     } else {
-                        Log.e("firestore", task.getException().getMessage());
+                        Log.e("AddBookErr", task.getException().getMessage());
                     }
                 }
             });
         }
     }
+
+    public void updateBook(Book book, Uri imageUri) {
+        if (imageUri != null) {
+            String image = imageUri.toString().substring(imageUri.toString().lastIndexOf("/"));
+            StorageReference myImage = reference.child(IMAGE_DIRECTORY + "/" + image);
+            myImage.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        task.getResult().getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if (task.isSuccessful()) {
+                                    String url = task.getResult().toString();
+                                    book.setCover(url);
+                                    firestore.collection(BOOK_COLLECTION).document(book.getBid()).set(book).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                ready.setValue(true);
+                                            } else {
+                                                Log.e("UpdateBookErr", task.getException().getMessage());
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
+            firestore.collection(BOOK_COLLECTION).document(book.getBid()).set(book).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        ready.setValue(true);
+                    } else {
+                        Log.e("UpdateBookErr", task.getException().getMessage());
+                    }
+                }
+            });
+        }
+    }
+
+    public  void removeBook(Book book) {
+        firestore.collection(BOOK_COLLECTION).document(book.getBid()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Log.d("RemoveBookExit","Libro Eliminado con Exito!!");
+                } else {
+                    Log.e("RemoveBook", task.getException().getMessage());
+                }
+            }
+        });
+    }
+
 }

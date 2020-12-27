@@ -66,17 +66,34 @@ public class ActivityAddBook extends AppCompatActivity {
             }
         });
 
-        activityAddBookBinding.setBook(new Book());
-        activityAddBookBinding.btAddBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Book nBook = activityAddBookBinding.getBook();
-                nBook.setCategory(categorySelected);
-                Log.e("add", nBook.toString());
-                viewModel.addBook(nBook,imageUri);
-                finish();
-            }
-        });
+        if (myBook != null) {
+            activityAddBookBinding.setBook(myBook);
+            activityAddBookBinding.btAddBook.setText("Editar Libro");
+            activityAddBookBinding.btAddBook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Book editBook =  activityAddBookBinding.getBook();
+                    editBook.setCategory(categorySelected);
+                    viewModel.updateBook(myBook,imageUri);
+                    Intent data = new Intent();
+                    data.putExtra("book",editBook);
+                    setResult(RESULT_OK,data);
+                    finish();
+                }
+            });
+        } else {
+            activityAddBookBinding.setBook(new Book());
+            activityAddBookBinding.btAddBook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Book nBook = activityAddBookBinding.getBook();
+                    nBook.setCategory(categorySelected);
+                    Log.e("add", nBook.toString());
+                    viewModel.addBook(nBook,imageUri);
+                    finish();
+                }
+            });
+        }
 
         activityAddBookBinding.ibCamera.setOnClickListener(new View.OnClickListener() {
             @Override

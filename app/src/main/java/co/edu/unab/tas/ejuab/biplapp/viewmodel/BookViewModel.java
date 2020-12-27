@@ -25,4 +25,12 @@ public class BookViewModel extends AndroidViewModel {
     public void addBook(Book book, Uri image) {
         bookRepository.addBook(book,image);
     }
+
+    public void updateBook(Book book, Uri image) {
+       bookRepository.updateBook(book,image);
+    }
+
+    public void removeProduct (Book book) {
+        bookRepository.removeBook(book);
+    }
 }
