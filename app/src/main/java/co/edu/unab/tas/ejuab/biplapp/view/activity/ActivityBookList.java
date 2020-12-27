@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -45,6 +46,12 @@ public class ActivityBookList extends AppCompatActivity {
                 Intent inAdmin =  new Intent(ActivityBookList.this,ActivityBookListAdmin.class);
                 startActivity(inAdmin);
                 break;
+            case R.id.mi_peril:
+               /* Intent in =  new Intent(ActivityBookList.this,  );
+                startActivity(in);
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.signOut();*/
+                break;
             case R.id.mi_close_session:
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 auth.signOut();
@@ -66,11 +73,20 @@ public class ActivityBookList extends AppCompatActivity {
         viewModel.getBooks().observe(ActivityBookList.this, new Observer<List<Book>>() {
             @Override
             public void onChanged(List<Book> books) {
-                adapter.setBooks((ArrayList<Book>) books);
+                if (books.isEmpty()){
+                    adapter.setBooks((ArrayList<Book>) books);
+                }
             }
         });
         bookListBinding.rvBooks.setHasFixedSize(true);
         bookListBinding.rvBooks.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Book book, int position) {
+                Toast.makeText(ActivityBookList.this, "Hice click en el libro" + book.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

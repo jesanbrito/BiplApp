@@ -17,4 +17,6 @@
     <string name="txt_hint_editorial">Editorial</string>
     <string name="txt_hint_category">Categoria</string>
     <string name="txt_add_book">Registrar Libro</string>
+    <string name="txt_hint_documento_usuario">Escriba el Documento</string>
+    <string name="txt_registro_usuario">Registro de Usuario</string>
 </resources>
