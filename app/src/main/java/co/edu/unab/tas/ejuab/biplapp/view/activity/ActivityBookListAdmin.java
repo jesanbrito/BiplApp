@@ -1,5 +1,6 @@
 package co.edu.unab.tas.ejuab.biplapp.view.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
@@ -7,18 +8,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.edu.unab.tas.ejuab.biplapp.ActivityDetailBook;
 import co.edu.unab.tas.ejuab.biplapp.R;
 import co.edu.unab.tas.ejuab.biplapp.databinding.ActivityBookListAdminBinding;
-import co.edu.unab.tas.ejuab.biplapp.databinding.ActivityBookListBinding;
 import co.edu.unab.tas.ejuab.biplapp.model.entity.Book;
 import co.edu.unab.tas.ejuab.biplapp.view.adapter.BookAdapter;
 import co.edu.unab.tas.ejuab.biplapp.viewmodel.BookListViewModel;
@@ -32,10 +30,12 @@ public class ActivityBookListAdmin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         bookListAdminBinding = DataBindingUtil.setContentView(ActivityBookListAdmin.this,R.layout.activity_book_list_admin);
         BookListViewModel viewModel = new ViewModelProvider(ActivityBookListAdmin.this).get(BookListViewModel.class);
         bookListAdminBinding.setViewModelAdmin(viewModel);
         adapter = new BookAdapter(new ArrayList<>());
+
         viewModel.getBooks().observe(ActivityBookListAdmin.this, new Observer<List<Book>>() {
             @Override
             public void onChanged(List<Book> books) {
@@ -44,6 +44,17 @@ public class ActivityBookListAdmin extends AppCompatActivity {
         });
         bookListAdminBinding.rvBooksAdmin.setHasFixedSize(true);
         bookListAdminBinding.rvBooksAdmin.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Book book, int position) {
+                Log.d("Seleccion",book.toString());
+                Intent intent = new Intent(ActivityBookListAdmin.this, ActivityDetailBook.class);
+                intent.putExtra("book", book);
+                startActivityForResult(intent, REQUEST_CODE_BOOK_DETAIL);
+            }
+        });
+
         bookListAdminBinding.btAddBookAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,16 +62,6 @@ public class ActivityBookListAdmin extends AppCompatActivity {
                 startActivity(in);
             }
         });
-
-        adapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Book book, int position) {
-                Intent myIntent = new Intent(ActivityBookListAdmin.this, ActivityDetailBook.class);
-              //  myIntent.putExtra("book",book);
-                startActivityForResult(myIntent, REQUEST_CODE_BOOK_DETAIL);
-            }
-        });
-
     }
 
     @Override
@@ -68,4 +69,15 @@ public class ActivityBookListAdmin extends AppCompatActivity {
         super.onResume();
         bookListAdminBinding.getViewModelAdmin().loadBooks();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_CODE_BOOK_DETAIL:
+                Toast.makeText(this,"Regresando del detalle",Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+    
 }
