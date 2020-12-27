@@ -12,4 +12,6 @@
     <string name="txt_hint_pass_usuario">Escriba su contraseña</string>
     <string name="txt_agregar_usuario">Agregar Usuario</string>
     <string name="txt_hint_telefono_usuario">Escriba el Teléfono</string>
+    <string name="txt_registro_usuario">Registro de Usuario</string>
+    <string name="txt_hint_documento_usuario">Escrita el documento</string>
 </resources>

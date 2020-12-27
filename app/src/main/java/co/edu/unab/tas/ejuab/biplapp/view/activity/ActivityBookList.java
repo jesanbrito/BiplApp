@@ -33,6 +33,12 @@ public class ActivityBookList extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.mi_peril:
+               /* Intent in =  new Intent(ActivityBookList.this,  );
+                startActivity(in);*/
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.signOut();
+                break;
             case R.id.mi_add_book:
                 /*Intent in =  new Intent(ProductListActivity.this,CartActivity.class);
                 startActivity(in);*/
