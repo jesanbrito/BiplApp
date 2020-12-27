@@ -6,7 +6,7 @@ import com.google.firebase.firestore.Exclude;
 
 import java.io.Serializable;
 
-public class Book implements Serializable {
+public class Book  implements Serializable {
     private String bid;
     private String title;
     private String author;
