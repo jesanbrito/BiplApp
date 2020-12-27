@@ -56,7 +56,7 @@ public class ActivityBookListAdmin extends AppCompatActivity {
             @Override
             public void onItemClick(Book book, int position) {
                 Intent myIntent = new Intent(ActivityBookListAdmin.this, ActivityDetailBook.class);
-              //  myIntent.putExtra("book",book);
+                myIntent.putExtra("book", book);
                 startActivityForResult(myIntent, REQUEST_CODE_BOOK_DETAIL);
             }
         });

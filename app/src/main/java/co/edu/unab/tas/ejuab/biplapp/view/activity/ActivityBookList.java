@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -74,8 +75,9 @@ public class ActivityBookList extends AppCompatActivity {
             @Override
             public void onChanged(List<Book> books) {
                 if (books.isEmpty()){
-                    adapter.setBooks((ArrayList<Book>) books);
+                   Log.d("book", "No se encontro libro");
                 }
+                adapter.setBooks((ArrayList<Book>) books);
             }
         });
         bookListBinding.rvBooks.setHasFixedSize(true);
