@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -13,10 +14,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import co.edu.unab.tas.ejuab.biplapp.model.entity.User;
 
@@ -29,6 +36,7 @@ public class   UserRepository {
     private MutableLiveData<User> currentUser;
     private StorageReference myReference;
     private MutableLiveData<Boolean> ready;
+    private MutableLiveData<List<User>> userList;
 
     public UserRepository(Context context){
         auth = FirebaseAuth.getInstance();
@@ -36,6 +44,52 @@ public class   UserRepository {
         currentUser = new MutableLiveData<>();
         myReference = FirebaseStorage.getInstance().getReference();
         ready = new MutableLiveData<>();
+        userList = new MutableLiveData<>();
+        listenUsers();
+        loadUsers();
+    }
+
+    public MutableLiveData<List<User>> getUsers() {
+        return userList;
+    }
+
+    public void listenUsers(){
+        firestore.collection(USER_COLLECTION).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error == null){
+                    List<User> list = new ArrayList<>();
+                    for (DocumentSnapshot item: value.getDocuments()) {
+                        User myUser = item.toObject(User.class);
+                        myUser.setUid(item.getId());
+                        list.add(myUser);
+                        userList.setValue(list);
+                    }
+                    userList.setValue(list);
+                }else{
+                    Log.e("firestore - Listen", error.getMessage());
+                }
+            }
+        });
+    }
+
+    public void loadUsers(){
+        firestore.collection(USER_COLLECTION).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    List<User> list = new ArrayList<>();
+                    for (DocumentSnapshot item: task.getResult().getDocuments()){
+                        User user = item.toObject(User.class);
+                        user.setUid(item.getId());
+                        list.add(user);
+                        userList.setValue(list);
+                    }
+                } else{
+                    Log.e("firestore", task.getException().getMessage());
+                }
+            }
+        });
     }
 
     public LiveData<Boolean> getReady() {

@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="viewModel"
+            type="co.edu.unab.tas.ejuab.biplapp.viewmodel.UserListViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.activity.UserListActivity$UserListActivity">
+        tools:context=".view.activity.UserListActivity">
 
         <Button
             android:id="@+id/bt_create_user"
@@ -22,8 +25,8 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginHorizontal="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:backgroundTint="#A6BD8B"
-            android:textColor="#100A0A"/>
+            android:backgroundTint="#955BA5"
+            android:textColor="#FFFFFF"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_users"

@@ -48,6 +48,10 @@ public class ActivityBookListAdmin extends AppCompatActivity {
                 startActivity(i);
                 finish();
                 break;
+            case R.id.mi_admin_user:
+                Intent myIntent = new Intent(ActivityBookListAdmin.this, UserListActivity.class);
+                startActivity(myIntent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
