@@ -20,10 +20,35 @@
             tools:context=".view.activity.MainActivity$UserFormActivity">
 
             <ImageView
+                android:id="@+id/iv_banner_init"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="14dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/ic_buho_init" />
+
+            <TextView
+                android:id="@+id/tv_title_perfil"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/sorts_mill_goudy"
+                android:text="@string/txt_perfil_usuario"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#354953"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_banner_init"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
                 android:id="@+id/iv_user_form"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="60dp"
                 android:src="@drawable/ic_launcher_background"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +58,7 @@
                 android:id="@+id/ib_camera_form"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_camera"
+                android:src="@drawable/ic_camera"
                 app:layout_constraintEnd_toStartOf="@id/ib_gallery_form"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_user_form" />
@@ -42,7 +67,7 @@
                 android:id="@+id/ib_gallery_form"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_gallery"
+                android:src="@drawable/ic_gallery"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ib_camera_form"
                 app:layout_constraintTop_toBottomOf="@id/iv_user_form" />
@@ -81,7 +106,46 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:hint="@string/txt_hint_apellido_usuario"
-                android:text="@{user.name}"/>
+                android:text="@{user.lastName}"/>
+
+            <EditText
+                android:id="@+id/et_user_phone_form"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="14"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/et_lastname_user_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:hint="@string/txt_hint_telefono_usuario"
+                android:text="@{user.phone}"/>
+
+            <EditText
+                android:id="@+id/et_user_email_form"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="14"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/et_user_phone_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:hint="@string/txt_hint_correo_usuario"
+                android:text="@{user.email}"/>
+
+            <Button
+                android:id="@+id/bt_edit_user_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#354953"
+                android:fontFamily="@font/sorts_mill_goudy"
+                android:text="@string/txt_hint_editar_usuario"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_user_email_form" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

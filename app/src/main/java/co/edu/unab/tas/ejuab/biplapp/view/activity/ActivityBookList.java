@@ -48,10 +48,8 @@ public class ActivityBookList extends AppCompatActivity {
                 startActivity(inAdmin);
                 break;
             case R.id.mi_peril:
-               /* Intent in =  new Intent(ActivityBookList.this,  );
+                Intent in =  new Intent(ActivityBookList.this, ActivityUserForm.class  );
                 startActivity(in);
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                auth.signOut();*/
                 break;
             case R.id.mi_close_session:
                 FirebaseAuth auth = FirebaseAuth.getInstance();

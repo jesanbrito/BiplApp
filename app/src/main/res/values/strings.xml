@@ -19,4 +19,6 @@
     <string name="txt_add_book">Registrar Libro</string>
     <string name="txt_hint_documento_usuario">Escriba el Documento</string>
     <string name="txt_registro_usuario">Registro de Usuario</string>
+    <string name="txt_perfil_usuario">Perfil de Usuario</string>
+    <string name="txt_hint_editar_usuario">Editar Usuario</string>
 </resources>

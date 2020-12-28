@@ -1,8 +1,15 @@
 package co.edu.unab.tas.ejuab.biplapp.model.entity;
 
-import com.google.firebase.firestore.Exclude;
 
-public class User {
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.PropertyName;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+
+public class User implements Serializable {
+    
     private String uid;
     private String document;
     private String name;
@@ -10,6 +17,8 @@ public class User {
     private String email;
     private String phone;
     private String status;
+    @SerializedName("url_image")
+    private String urlImage;
 
     public User(String uid, String typeDocument, String document, String name, String lastName, String email, String phone, String status) {
         this.uid = "";
@@ -19,6 +28,7 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.status = status;
+        this.urlImage = urlImage;
     }
 
     public User() {
@@ -29,6 +39,7 @@ public class User {
         this.email = "";
         this.phone = "";
         this.status = "";
+        this.urlImage = "";
     }
 
     @Exclude
@@ -70,6 +81,16 @@ public class User {
         return email;
     }
 
+    @PropertyName("url_image")
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    @PropertyName("url_image")
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -88,5 +109,19 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid='" + uid + '\'' +
+                ", document='" + document + '\'' +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", status='" + status + '\'' +
+                ", urlImage='" + urlImage + '\'' +
+                '}';
     }
 }

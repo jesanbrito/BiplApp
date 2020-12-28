@@ -1,6 +1,7 @@
 package co.edu.unab.tas.ejuab.biplapp.model.repository;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -13,20 +14,32 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import co.edu.unab.tas.ejuab.biplapp.model.entity.User;
 
 public class   UserRepository {
 
     public static final String USER_COLLECTION = "users";
+    private static final String IMAGE_DIRECTORY = "images" ;
     private FirebaseAuth auth;
     private FirebaseFirestore firestore;
     private MutableLiveData<User> currentUser;
+    private StorageReference myReference;
+    private MutableLiveData<Boolean> ready;
 
     public UserRepository(Context context){
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         currentUser = new MutableLiveData<>();
+        myReference = FirebaseStorage.getInstance().getReference();
+        ready = new MutableLiveData<>();
+    }
+
+    public LiveData<Boolean> getReady() {
+        return ready;
     }
 
     public LiveData<User> getCurrentUser() {
@@ -81,4 +94,54 @@ public class   UserRepository {
             }
         });
     }
+
+    public void updateProfile(User myUser, Uri imageUri){
+
+        Log.d("usuario", myUser.getDocument());
+
+        if(imageUri != null){
+            String image = imageUri.toString().substring(imageUri.toString().lastIndexOf("/"));
+            StorageReference myImage = myReference.child(IMAGE_DIRECTORY + "/" + image);
+            myImage.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if(task.isSuccessful()){
+                        task.getResult().getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if(task.isSuccessful()){
+                                    String url = task.getResult().toString();
+                                    myUser.setUrlImage(url);
+                                    firestore.collection(USER_COLLECTION).document(myUser.getUid()).set(myUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                ready.setValue(true);
+                                            }else{
+                                                Log.e("perfil", task.getException().getMessage());
+                                            }
+                                        }
+                                    });
+                                }
+
+                            }
+                        });
+                    }
+                }
+            });
+        }else{
+            firestore.collection(USER_COLLECTION).document(myUser.getUid()).set(myUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        ready.setValue(true);
+                    }else{
+                        Log.e("perfil", task.getException().getMessage());
+                    }
+                }
+            });
+        }
+
+    }
+
 }
