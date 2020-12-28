@@ -1,15 +1,10 @@
 package co.edu.unab.tas.ejuab.biplapp.model.entity;
 
-
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.PropertyName;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-
-public class User implements Serializable {
-    
+public class User {
     private String uid;
     private String document;
     private String name;
@@ -17,10 +12,11 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String status;
+    private Integer role;
     @SerializedName("url_image")
     private String urlImage;
 
-    public User(String uid, String typeDocument, String document, String name, String lastName, String email, String phone, String status) {
+    public User(String uid, String typeDocument, String document, String name, String lastName, String email, String phone, String status, Integer role) {
         this.uid = "";
         this.document = document;
         this.name = name;
@@ -28,6 +24,7 @@ public class User implements Serializable {
         this.email = email;
         this.phone = phone;
         this.status = status;
+        this.role = role;
         this.urlImage = urlImage;
     }
 
@@ -39,6 +36,7 @@ public class User implements Serializable {
         this.email = "";
         this.phone = "";
         this.status = "";
+        this.role = 0;
         this.urlImage = "";
     }
 
@@ -81,16 +79,6 @@ public class User implements Serializable {
         return email;
     }
 
-    @PropertyName("url_image")
-    public String getUrlImage() {
-        return urlImage;
-    }
-
-    @PropertyName("url_image")
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -111,17 +99,21 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "uid='" + uid + '\'' +
-                ", document='" + document + '\'' +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", status='" + status + '\'' +
-                ", urlImage='" + urlImage + '\'' +
-                '}';
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
+    @PropertyName("url_image")
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    @PropertyName("url_image")
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 }

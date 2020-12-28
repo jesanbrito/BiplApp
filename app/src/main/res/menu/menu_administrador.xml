@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mi_admin_user"
+        android:title="Administrar Usuarios" />
+    <item
+        android:id="@+id/mi_list_loan"
+        android:title="Consultas Generales" />
+    <item
+        android:id="@+id/mi_close_session"
+        android:title="Cerrar Sesión" />
+</menu>
