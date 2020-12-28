@@ -8,103 +8,101 @@
         <variable name="book" type="co.edu.unab.tas.ejuab.biplapp.model.entity.Book" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.activity.ProductDetailActivity">
-
-        <ImageView
-            android:id="@+id/iv_book_detail"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        android:layout_margin="8dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            bind:image="@{book.cover}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@mipmap/ic_book_list_round" />
-        <TextView
-            android:id="@+id/tv_title_book_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_margin="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/iv_book_detail"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@{`Libro      : `+book.title}"/>
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+            <ImageView
+                android:id="@+id/iv_book_detail"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                bind:image="@{book.cover}"
+                android:src="@mipmap/ic_book_list_round"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/bt_edit_book"/>
 
-        <TextView
-            android:id="@+id/tv_editorial_book_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title_book_detail"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@{`Editorial : `+book.editorial}"/>
+            <TextView
+                android:id="@+id/tv_title_book_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:text="@{`Libro : `+book.title}"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_detail"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_editorial_book_detail" />
 
-        <TextView
-            android:id="@+id/tv_author_book_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_editorial_book_detail"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@{`Autor      : `+book.author}"/>
+            <TextView
+                android:id="@+id/tv_editorial_book_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:text="@{`Editorial : `+book.editorial}"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_detail"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_author_book_detail" />
 
-        <TextView
-            android:id="@+id/tv_status_book_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_author_book_detail"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@{`Estado   : `+(book.status == 1 ? `Disponible` : book.status == 2 ? `Reservado` : `Prestado`)}"/>
+            <TextView
+                android:id="@+id/tv_author_book_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:text="@{`Autor : `+book.author}"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_detail"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_status_book_detail" />
 
-        <Button
-            android:id="@+id/bt_edit_book"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#955BA5"
-            android:textColor="#FFFFFF"
-            android:fontFamily="@font/sorts_mill_goudy"
-            app:layout_constraintTop_toBottomOf="@+id/tv_status_book_detail"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/bt_delete_book"
-            android:text="Editar"/>
+            <TextView
+                android:id="@+id/tv_status_book_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:text="@{ `Estado : `+(book.status == 1 ? `Disponible` : book.status == 2 ? `Reservado` : `Prestado`)}"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_detail"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/bt_edit_book"/>
 
-        <Button
-            android:id="@+id/bt_delete_book"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#354953"
-            android:textColor="#FFFFFF"
-            android:fontFamily="@font/sorts_mill_goudy"
-            app:layout_constraintTop_toBottomOf="@+id/tv_status_book_detail"
-            app:layout_constraintStart_toEndOf="@+id/bt_edit_book"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="Eliminar"/>
+            <Button
+                android:id="@+id/bt_edit_book"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#955BA5"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/sorts_mill_goudy"
+                app:layout_constraintTop_toBottomOf="@+id/tv_status_book_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/bt_delete_book"
+                android:text="Editar"/>
 
-       <!-- <Button
-            android:id="@+id/bt_add_cart_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_agregar_carrito"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bt_edit_product"/>-->
+            <Button
+                android:id="@+id/bt_delete_book"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#354953"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/sorts_mill_goudy"
+                app:layout_constraintTop_toBottomOf="@+id/tv_status_book_detail"
+                app:layout_constraintStart_toEndOf="@+id/bt_edit_book"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Eliminar"/>
 
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

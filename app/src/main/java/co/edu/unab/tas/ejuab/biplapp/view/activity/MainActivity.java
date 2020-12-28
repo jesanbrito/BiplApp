@@ -43,10 +43,13 @@ public class MainActivity extends AppCompatActivity {
                     public void onChanged(User user) {
                         if (user != null) {
                             Toast.makeText(MainActivity.this, "Bienvenido "+user.getName()+" "+user.getLastName()+" !!", Toast.LENGTH_SHORT).show();
-                            Intent myIntent = new Intent(MainActivity.this, ActivityBookList.class);
+                            Intent myIntent = null;
+                            if (user.getRole() == 1) {
+                                myIntent = new Intent(MainActivity.this, ActivityBookListAdmin.class);
+                            } else {
+                                myIntent = new Intent(MainActivity.this, ActivityBookList.class);
+                            }
                             startActivity(myIntent);
-                           // Intent myIntent =  new Intent(MainActivity.this, ActivityBookList.class);
-                           // startActivity(myIntent);
                         } else {
                             Toast.makeText(MainActivity.this, "No existe usuario en el sistema..", Toast.LENGTH_SHORT).show();
                         }

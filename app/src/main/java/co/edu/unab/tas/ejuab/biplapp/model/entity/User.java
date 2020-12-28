@@ -10,8 +10,9 @@ public class User {
     private String email;
     private String phone;
     private String status;
+    private Integer role;
 
-    public User(String uid, String typeDocument, String document, String name, String lastName, String email, String phone, String status) {
+    public User(String uid, String typeDocument, String document, String name, String lastName, String email, String phone, String status, Integer role) {
         this.uid = "";
         this.document = document;
         this.name = name;
@@ -19,6 +20,7 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.status = status;
+        this.role = role;
     }
 
     public User() {
@@ -29,6 +31,7 @@ public class User {
         this.email = "";
         this.phone = "";
         this.status = "";
+        this.role = 0;
     }
 
     @Exclude
@@ -88,5 +91,13 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
     }
 }

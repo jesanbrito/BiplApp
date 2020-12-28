@@ -34,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
                 User myUser = registerBinding.getUser();
                 String pass = registerBinding.getPassword();
                 myUser.setStatus("Habilitado");
+                myUser.setRole(2);
 
                 Log.e("variables", myUser.getEmail() + " " + pass);
 
