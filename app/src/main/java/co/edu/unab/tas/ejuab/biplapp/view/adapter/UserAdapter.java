@@ -20,8 +20,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private ListUserBinding userBinding;
     private ArrayList<User> users;
 
+
     public UserAdapter(ArrayList<User> users) {
         this.users = users;
+    }
+
+    public void setUsers(ArrayList<User> users){
+        this.users = users;
+        notifyDataSetChanged();
     }
 
     @NonNull

@@ -4,7 +4,6 @@
     <string name="txt_hint_email">Escriba su Email</string>
     <string name="txt_hint_password">Escriba su contraseña</string>
     <string name="txt_crear_cuenta">Crear cuenta</string>
-    <string name="txt_nombre_app">Biblioteca Pública</string>
     <string name="txt_hint_nombre_usuario">Escriba su nombre</string>
     <string name="txt_hint_apellido_usuario">Escriba su apellido</string>
     <string name="txt_hint_identificacion_usuario">Escriba su documento</string>
@@ -15,10 +14,14 @@
     <string name="txt_hint_title">Titulo del Libro</string>
     <string name="txt_hint_author">Autor</string>
     <string name="txt_hint_editorial">Editorial</string>
-    <string name="txt_hint_category">Categoria</string>
     <string name="txt_add_book">Registrar Libro</string>
     <string name="txt_hint_documento_usuario">Escriba el Documento</string>
     <string name="txt_registro_usuario">Registro de Usuario</string>
     <string name="txt_perfil_usuario">Perfil de Usuario</string>
     <string name="txt_hint_editar_usuario">Editar Usuario</string>
+    <string name="title_activity_user_detail">UserDetailActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
 </resources>
