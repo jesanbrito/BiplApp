@@ -2,15 +2,20 @@ package co.edu.unab.tas.ejuab.biplapp.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,11 @@ public class UserListActivity  extends AppCompatActivity {
     private ArrayList<User> userList;
     private ActivityUserListBinding userListBinding;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_administrador, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +86,21 @@ public class UserListActivity  extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent in;
+        switch (item.getItemId()){
+            case R.id.mi_close_session:
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.signOut();
+                in = new Intent(UserListActivity.this, MainActivity.class);
+                startActivity(in);
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

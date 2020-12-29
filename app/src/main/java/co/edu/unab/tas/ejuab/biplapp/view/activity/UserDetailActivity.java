@@ -1,5 +1,6 @@
 package co.edu.unab.tas.ejuab.biplapp.view.activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -7,7 +8,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import co.edu.unab.tas.ejuab.biplapp.R;
 import co.edu.unab.tas.ejuab.biplapp.databinding.ActivityUserDetailBinding;
@@ -51,6 +56,31 @@ public class UserDetailActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_administrador, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent in;
+        switch (item.getItemId()){
+            case R.id.mi_close_session:
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.signOut();
+                in = new Intent(UserDetailActivity.this, MainActivity.class);
+                startActivity(in);
+                finish();
+                break;
+            case R.id.mi_admin_user:
+                in = new Intent(UserDetailActivity.this, UserListActivity.class);
+                startActivity(in);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
