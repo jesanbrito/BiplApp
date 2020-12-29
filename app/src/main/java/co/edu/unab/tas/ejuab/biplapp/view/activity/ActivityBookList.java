@@ -1,6 +1,7 @@
 package co.edu.unab.tas.ejuab.biplapp.view.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -13,11 +14,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import co.edu.unab.tas.ejuab.biplapp.R;
@@ -91,25 +95,28 @@ public class ActivityBookList extends AppCompatActivity {
                 alerta.setMessage("Esta Seguro de Reservar el Libro "+book.getTitle()+"?. Recuerde, tiene 3 días hábiles para retirarlo de la Biblioteca.").setCancelable(false).setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final String[] idUser = {""};
-                        viewModelUser.getCurrentUser().observe(ActivityBookList.this, new Observer<User>() {
-                            @Override
-                            public void onChanged(User user) {
-                                idUser[0] = user.getUid();
-                            }
-                        });
+                        int codReserva = (int) Math.floor(Math.random()*100);
+                        book.setStatus(2);
+                        viewModelBook.updateBook(book, null);
+
                         long date = System.currentTimeMillis();
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         String dateString = sdf.format(date);
 
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.add(Calendar.DAY_OF_YEAR,3);
+                        Date deliverTime = calendar.getTime();
+                        String deliverString = sdf.format(deliverTime);
+
                         Loan loan = new Loan();
                         loan.setRegistry_date(dateString);
-                        loan.setUser_id(idUser[0]);
-
-                        book.setStatus(2);
-                        viewModelBook.updateBook(book, null);
+                        loan.setBook(book);
+                        loan.setStatus(true);
+                        loan.setDeliver_date(deliverString);
+                        loan.setCodigo_reserva("RV00"+codReserva);
                         viewModelLoan.addLoan(loan);
-                        finish();
+                        setResult(RESULT_OK);
+                        Toast.makeText(ActivityBookList.this,"Prestamo No. RV00"+codReserva+" asignado", Toast.LENGTH_LONG).show();
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
@@ -129,4 +136,5 @@ public class ActivityBookList extends AppCompatActivity {
         super.onResume();
         bookListBinding.getViewModel().loadBooks();
     }
+
 }
