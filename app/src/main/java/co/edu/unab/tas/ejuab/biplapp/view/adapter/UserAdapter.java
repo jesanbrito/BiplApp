@@ -17,12 +17,14 @@ import co.edu.unab.tas.ejuab.biplapp.model.entity.User;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
-    private ListUserBinding userBinding;
+    //private ListUserBinding userBinding;
     private ArrayList<User> users;
+    private OnItemClickListener onItemClickListener;
 
 
     public UserAdapter(ArrayList<User> users) {
         this.users = users;
+        onItemClickListener = null;
     }
 
     public void setUsers(ArrayList<User> users){
@@ -30,13 +32,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         notifyDataSetChanged();
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        userBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.list_user, parent, false);
+        //userBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.list_user, parent, false);
+        ListUserBinding userBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.list_user, parent, false);
 
-        return new UserViewHolder(userBinding.getRoot());
+        return new UserViewHolder(userBinding);
     }
 
     @Override
@@ -53,15 +60,27 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
+        private ListUserBinding userBinding;
 
-
-        public UserViewHolder(@NonNull View itemView) {
-
-            super(itemView);
+        public UserViewHolder(@NonNull ListUserBinding itemView) {
+            super(itemView.getRoot());
+            userBinding = itemView;
         }
 
         private void onBind(User myUser) {
             userBinding.setMyUser(myUser);
+            if(onItemClickListener != null){
+                userBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onItemClickListener.onItemClick(myUser, getAdapterPosition());
+                    }
+                });
+            }
         }
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(User myUser, int position);
     }
 }

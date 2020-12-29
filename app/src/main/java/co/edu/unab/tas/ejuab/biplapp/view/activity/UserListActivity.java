@@ -3,6 +3,7 @@ package co.edu.unab.tas.ejuab.biplapp.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,8 @@ import co.edu.unab.tas.ejuab.biplapp.viewmodel.UserListViewModel;
 
 public class UserListActivity  extends AppCompatActivity {
 
-    private UserAdapter myAdapter;
+    private static final int REQUEST_CODE_USER_DETAIL = 221 ;
+    private UserAdapter userAdapter;
     private ArrayList<User> userList;
     private ActivityUserListBinding userListBinding;
 
@@ -37,7 +39,7 @@ public class UserListActivity  extends AppCompatActivity {
 
         userListBinding.setViewModel(viewModel);
 
-        myAdapter = new UserAdapter(new ArrayList<>());
+        userAdapter = new UserAdapter(new ArrayList<>());
 
         viewModel.getUserList().observe(UserListActivity.this, new Observer<List<User>>() {
             @Override
@@ -45,7 +47,7 @@ public class UserListActivity  extends AppCompatActivity {
                 if(users.isEmpty()){
 
                 }
-                myAdapter.setUsers((ArrayList<User>) users);
+                userAdapter.setUsers((ArrayList<User>) users);
             }
         });
 
@@ -53,7 +55,17 @@ public class UserListActivity  extends AppCompatActivity {
         //myAdapter = new UserAdapter(userList);
 
         userListBinding.rvUsers.setHasFixedSize(true);
-        userListBinding.rvUsers.setAdapter(myAdapter);
+        userListBinding.rvUsers.setAdapter(userAdapter);
+
+        userAdapter.setOnItemClickListener(new UserAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(User myUser, int position) {
+                Toast.makeText(UserListActivity.this, "Hice Click al Usuario: " +myUser.getName()+" "+myUser.getLastName(), Toast.LENGTH_SHORT).show();
+                Intent myIntent = new Intent(UserListActivity.this, UserDetailActivity.class);
+                myIntent.putExtra("user", myUser);
+                startActivityForResult(myIntent, REQUEST_CODE_USER_DETAIL);
+            }
+        });
 
 
         userListBinding.btCreateUser.setOnClickListener(new View.OnClickListener() {

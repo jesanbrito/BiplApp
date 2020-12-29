@@ -29,6 +29,10 @@ public class UserListViewModel extends AndroidViewModel {
         return userRepository.getUsers();
     }
 
+    public void removeUser(User myUser){
+        userRepository.removeUser(myUser);
+    }
+
     public void loadUsers(){
         userRepository.loadUsers();
     }

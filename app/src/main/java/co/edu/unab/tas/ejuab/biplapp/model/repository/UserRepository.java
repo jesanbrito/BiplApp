@@ -198,4 +198,17 @@ public class   UserRepository {
 
     }
 
+    public void removeUser(User myUser){
+        firestore.collection(USER_COLLECTION).document(myUser.getUid()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    loadUsers();
+                }else{
+                    Log.e("firestore", task.getException().getMessage());
+                }
+            }
+        });
+    }
+
 }

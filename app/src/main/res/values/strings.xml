@@ -20,6 +20,7 @@
     <string name="txt_perfil_usuario">Perfil de Usuario</string>
     <string name="txt_hint_editar_usuario">Editar Usuario</string>
     <string name="title_activity_user_detail">UserDetailActivity</string>
+    <string name="txt_hint_estado_usuario">Escriba su Estado</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
