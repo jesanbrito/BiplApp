@@ -24,6 +24,7 @@
         <activity android:name=".view.activity.RegisterActivity" />
         <activity android:name=".view.activity.ActivityUserForm" />
         <activity android:name=".view.activity.UserListActivity" />
+        <activity android:name=".view.activity.SearchBookActivity"></activity>
         <activity android:name=".view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
