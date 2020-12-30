@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BiplApp">
-        <activity android:name=".view.activity.UserDetailActivity"></activity>
+        <activity android:name=".view.activity.ActivityUserLoan"></activity>
+        <activity android:name=".view.activity.UserDetailActivity" />
         <activity android:name=".view.activity.ActivityDetailBook" />
         <activity android:name=".view.activity.ActivityBookListAdmin" />
         <activity android:name=".view.activity.ActivityAddBook" />
