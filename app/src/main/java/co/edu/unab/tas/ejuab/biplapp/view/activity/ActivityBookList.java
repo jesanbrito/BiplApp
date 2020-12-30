@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.google.api.OAuthRequirementsOrBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.SimpleDateFormat;
@@ -112,7 +113,12 @@ public class ActivityBookList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String value = bookListBinding.getFilter();
-                String filter = (filterSelected == "Titulo" ? "title" : filterSelected == "Autor" ? "author" : "category");
+                String filter = "title";
+                if (filterSelected.equals("Autor")) {
+                    filter = "author";
+                } else if (filterSelected.equals("Categoria")) {
+                    filter = "category";
+                }
                 viewModel.loadFiltersBook(filter,value);
             }
         });
