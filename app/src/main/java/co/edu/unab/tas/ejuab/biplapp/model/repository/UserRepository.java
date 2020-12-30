@@ -47,6 +47,9 @@ public class   UserRepository {
         userList = new MutableLiveData<>();
         listenUsers();
         loadUsers();
+        if(auth.getUid() != null){
+            loadUser();
+        }
     }
 
     public MutableLiveData<List<User>> getUsers() {
@@ -88,6 +91,24 @@ public class   UserRepository {
                 } else{
                     Log.e("firestore", task.getException().getMessage());
                 }
+            }
+        });
+    }
+
+    public void loadUser(){
+        firestore.collection(USER_COLLECTION).document(auth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult() != null) {
+                        User myUser = task.getResult().toObject(User.class);
+                        myUser.setUid(auth.getUid());
+                        currentUser.setValue(myUser);
+                    }
+                } else {
+                    Log.e("loaduser",task.getException().getMessage());
+                }
+
             }
         });
     }
@@ -197,6 +218,7 @@ public class   UserRepository {
         }
 
     }
+
 
     public void removeUser(User myUser){
         firestore.collection(USER_COLLECTION).document(myUser.getUid()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {

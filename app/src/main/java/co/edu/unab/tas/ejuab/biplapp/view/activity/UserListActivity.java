@@ -81,7 +81,7 @@ public class UserListActivity  extends AppCompatActivity {
         userListBinding.btCreateUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(UserListActivity.this, ActivityUserForm.class);
+                Intent myIntent = new Intent(UserListActivity.this, RegisterActivity.class);
                 startActivity(myIntent);
             }
         });

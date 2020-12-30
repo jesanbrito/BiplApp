@@ -53,9 +53,7 @@ public class UserDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
+        
     }
 
     @Override

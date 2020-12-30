@@ -23,6 +23,10 @@ public class UserFormViewModel extends AndroidViewModel {
         userRepository.updateProfile(myUser, imageUri);
     }
 
+    public LiveData<User> getCurrentUser(){
+        return userRepository.getCurrentUser();
+    }
+
    public LiveData<Boolean> getReady(){
         return userRepository.getReady();
    }

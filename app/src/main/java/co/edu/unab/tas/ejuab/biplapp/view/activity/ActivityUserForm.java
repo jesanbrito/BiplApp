@@ -42,7 +42,6 @@ public class ActivityUserForm extends AppCompatActivity {
 
         User myUser = (User) getIntent().getSerializableExtra("user");
         userFormBinding = DataBindingUtil.setContentView(ActivityUserForm.this, R.layout.activity_user_form);
-
         if(myUser != null){
             userFormBinding.setUser(myUser);
             userFormBinding.btEditUserForm.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +63,36 @@ public class ActivityUserForm extends AppCompatActivity {
                     });
                 }
             });
-        }else{
+        }else {
+            viewModel.getCurrentUser().observe(ActivityUserForm.this, new Observer<User>() {
+                @Override
+                public void onChanged(User user) {
+
+                    userFormBinding.setUser(user);
+                    userFormBinding.btEditUserForm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            User myEditUser = userFormBinding.getUser();
+                            viewModel.editUser(myEditUser, imageUri);
+                            Intent data = new Intent();
+                            data.putExtra("user", myEditUser);
+
+                            setResult(RESULT_OK, data);
+                            viewModel.getReady().observe(ActivityUserForm.this, new Observer<Boolean>() {
+                                @Override
+                                public void onChanged(Boolean aBoolean) {
+                                    if (aBoolean) {
+                                        finish();
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                }
+            });
+        }
+        /*else{
 
             userFormBinding.setUser(new User());
             userFormBinding.btEditUserForm.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +111,7 @@ public class ActivityUserForm extends AppCompatActivity {
                 }
             });
 
-        }
+        }*/
 
         userFormBinding.ibCameraForm.setOnClickListener(new View.OnClickListener() {
             @Override

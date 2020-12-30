@@ -50,7 +50,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="60dp"
-                bind:image="@{user.urlImage}"
+                bind:imageuser="@{user.urlImage}"
                 android:src="@drawable/ic_launcher_background"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -22,7 +22,7 @@
                 android:id="@+id/iv_user_detail"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                bind:image="@{user.urlImage}"
+                bind:imageuser="@{user.urlImage}"
                 android:src="@mipmap/ic_user_round"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
