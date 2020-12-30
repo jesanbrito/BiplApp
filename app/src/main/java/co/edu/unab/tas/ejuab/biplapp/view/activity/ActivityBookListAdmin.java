@@ -40,17 +40,22 @@ public class ActivityBookListAdmin extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent in;
         switch (item.getItemId()) {
             case R.id.mi_close_session:
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 auth.signOut();
-                Intent i =  new Intent(ActivityBookListAdmin.this,MainActivity.class);
-                startActivity(i);
+                in =  new Intent(ActivityBookListAdmin.this,MainActivity.class);
+                startActivity(in);
                 finish();
                 break;
             case R.id.mi_admin_user:
-                Intent myIntent = new Intent(ActivityBookListAdmin.this, UserListActivity.class);
-                startActivity(myIntent);
+                in = new Intent(ActivityBookListAdmin.this, UserListActivity.class);
+                startActivity(in);
+                break;
+            case R.id.mi_list_loan:
+                in = new Intent(ActivityBookListAdmin.this, SearchBookActivity.class);
+                startActivity(in);
                 break;
         }
         return super.onOptionsItemSelected(item);

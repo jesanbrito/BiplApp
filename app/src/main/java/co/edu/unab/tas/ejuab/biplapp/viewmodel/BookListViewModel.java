@@ -34,4 +34,8 @@ public class BookListViewModel extends AndroidViewModel {
     public void loadFiltersBook(String filter, String value) {
         bookRepository.loadFiltersBook(filter,value);
     }
+
+    public void loadSearchBook(Integer filter){
+        bookRepository.loadSearchBook(filter);
+    }
 }
