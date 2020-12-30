@@ -29,8 +29,7 @@ import co.edu.unab.tas.ejuab.biplapp.model.entity.Book;
 import co.edu.unab.tas.ejuab.biplapp.model.entity.Loan;
 
 public class LoanRepository {
-
-    public static final String BOOK_COLLECTION = "books";
+    
     private static final String LOAN_COLLECTION = "loans";
     private FirebaseFirestore firestore;
     private FirebaseAuth auth;
