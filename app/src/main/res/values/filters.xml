@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filters">
+        <item>Titulo</item>
+        <item>Autor</item>
+        <item>Categoria</item>
+    </string-array>
+</resources>

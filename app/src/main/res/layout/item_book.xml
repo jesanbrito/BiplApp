@@ -61,6 +61,18 @@
                 app:layout_constraintStart_toEndOf="@+id/iv_book_cover"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_category_book" />
+
+            <TextView
+                android:id="@+id/tv_category_book"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:text="@{`Categoria : `+book.category}"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_cover"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/tv_status_book" />
 
             <TextView

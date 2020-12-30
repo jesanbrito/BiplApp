@@ -14,6 +14,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,6 +43,7 @@ public class ActivityBookList extends AppCompatActivity {
     private ArrayList<Book> bookList;
     private BookAdapter adapter;
     private ActivityBookListBinding bookListBinding;
+    private String filterSelected = "";
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,7 +76,6 @@ public class ActivityBookList extends AppCompatActivity {
         BookListViewModel viewModel = new ViewModelProvider(ActivityBookList.this).get(BookListViewModel.class);
         BookViewModel viewModelBook =  new ViewModelProvider(ActivityBookList.this).get(BookViewModel.class);
         LoanViewModel viewModelLoan =  new ViewModelProvider(ActivityBookList.this).get(LoanViewModel.class);
-        RegisterViewModel viewModelUser = new ViewModelProvider(ActivityBookList.this).get(RegisterViewModel.class);
 
         bookListBinding.setViewModel(viewModel);
         adapter = new BookAdapter(new ArrayList<>());
@@ -87,6 +90,32 @@ public class ActivityBookList extends AppCompatActivity {
         });
         bookListBinding.rvBooks.setHasFixedSize(true);
         bookListBinding.rvBooks.setAdapter(adapter);
+
+        String[] textFilter = getResources().getStringArray(R.array.filters);
+        ArrayAdapter<String> adapterSp = new ArrayAdapter<String>(ActivityBookList.this,R.layout.text_view_spinner,textFilter);
+        adapterSp.setDropDownViewResource(R.layout.text_view_spinner);
+        bookListBinding.spFilter.setAdapter(adapterSp);
+
+        bookListBinding.spFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                filterSelected = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        bookListBinding.searchBooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = bookListBinding.getFilter();
+                String filter = (filterSelected == "Titulo" ? "title" : filterSelected == "Autor" ? "author" : "category");
+                viewModel.loadFiltersBook(filter,value);
+            }
+        });
 
         adapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
             @Override

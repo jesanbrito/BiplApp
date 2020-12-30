@@ -68,6 +68,29 @@ public class BookRepository {
         });
     }
 
+    public void loadFiltersBook(String filter, String value) {
+        if (!value.equals("")) {
+            firestore.collection(BOOK_COLLECTION).whereEqualTo(filter, value).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        List<Book> list = new ArrayList<>();
+                        for (DocumentSnapshot item : task.getResult().getDocuments()) {
+                            Book book = item.toObject(Book.class);
+                            book.setBid(item.getId());
+                            list.add(book);
+                            bookList.setValue(list);
+                        }
+                    } else {
+                        Log.e("firestore", task.getException().getMessage());
+                    }
+                }
+            });
+        } else {
+            loadBooks();
+        }
+    }
+
     public void loadBooks() {
         firestore.collection(BOOK_COLLECTION).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
