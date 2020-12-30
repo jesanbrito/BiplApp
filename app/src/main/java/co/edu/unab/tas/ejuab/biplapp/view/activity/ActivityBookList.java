@@ -55,6 +55,10 @@ public class ActivityBookList extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.mi_loan:
+                Intent inLoan =  new Intent(ActivityBookList.this, ActivityUserLoan.class  );
+                startActivity(inLoan);
+                break;
             case R.id.mi_peril:
                 Intent in =  new Intent(ActivityBookList.this, ActivityUserForm.class  );
                 startActivity(in);
@@ -145,7 +149,7 @@ public class ActivityBookList extends AppCompatActivity {
 
                         Loan loan = new Loan();
                         loan.setRegistry_date(dateString);
-                        loan.setBook(book);
+                        loan.setBook_id(book.getBid());
                         loan.setStatus(true);
                         loan.setDeliver_date(deliverString);
                         loan.setCodigo_reserva("RV00"+codReserva);

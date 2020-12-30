@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="loan" type="co.edu.unab.tas.ejuab.biplapp.model.entity.Loan" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        android:layout_margin="8dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+            <ImageView
+                android:id="@+id/iv_book_cover_loan"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                bind:image="@{loan.book.cover}"
+                android:src="@mipmap/ic_book_list_round"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_title_book_loan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:text="@{`Libro : `+loan.book.title}"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_cover_loan"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_status_book_loan" />
+
+            <TextView
+                android:id="@+id/tv_status_book_loan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:text="@{`Estado : `+(loan.book.status == 2 ? `Reservado` : `Prestado`)}"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_cover_loan"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_code_book_loan" />
+
+            <TextView
+                android:id="@+id/tv_code_book_loan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:text="@{`Codigo Reserva : `+loan.codigo_reserva}"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_cover_loan"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_registry_date_loan" />
+
+            <TextView
+                android:id="@+id/tv_registry_date_loan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:text="@{`Fecha de Reserva : `+loan.registry_date}"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_cover_loan"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_status_loan" />
+
+            <TextView
+                android:id="@+id/tv_status_loan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:text="@{ `Estado : `+(loan.status == true ? `Activo` : `Inactivo`)}"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_cover_loan"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

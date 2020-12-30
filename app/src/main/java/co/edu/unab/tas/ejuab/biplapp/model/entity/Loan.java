@@ -8,22 +8,24 @@ import java.util.Date;
 public class Loan implements Serializable {
     private String lid;
     private String registry_date;
-    private Book book;
+    private String book_id;
     private String user_id;
     private boolean status;
     private String deliver_date;
     private String return_date;
     private String codigo_reserva;
+    private Book book;
 
     public Loan() {
         this.lid = "";
         this.registry_date = "";
-        this.book = new Book();
+        this.book_id = "";
         this.user_id = "";
         this.status = true;
         this.deliver_date = "";
         this.return_date = "";
         this.codigo_reserva = "";
+        this.book = new Book();
     }
 
     @Exclude
@@ -44,14 +46,12 @@ public class Loan implements Serializable {
         this.registry_date = registry_date;
     }
 
-    @Exclude
-    public Book getBook() {
-        return book;
+    public String getBook_id() {
+        return book_id;
     }
 
-    @Exclude
-    public void setBook(Book book) {
-        this.book = book;
+    public void setBook_id(String book_id) {
+        this.book_id = book_id;
     }
 
     public String getUser_id() {
@@ -94,12 +94,22 @@ public class Loan implements Serializable {
         this.codigo_reserva = codigo_reserva;
     }
 
+    @Exclude
+    public Book getBook() {
+        return book;
+    }
+
+    @Exclude
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
     @Override
     public String toString() {
         return "Loan{" +
                 "lid='" + lid + '\'' +
                 ", registry_date='" + registry_date + '\'' +
-                ", book=" + book +
+                ", book=" + book_id +
                 ", user_id='" + user_id + '\'' +
                 ", status=" + status +
                 ", deliver_date='" + deliver_date + '\'' +

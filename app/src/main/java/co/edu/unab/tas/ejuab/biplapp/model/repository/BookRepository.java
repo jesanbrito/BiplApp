@@ -30,7 +30,7 @@ import co.edu.unab.tas.ejuab.biplapp.model.entity.Book;
 public class BookRepository {
 
     private static final String IMAGE_DIRECTORY = "image";
-    private static final String BOOK_COLLECTION = "books";
+    public static final String BOOK_COLLECTION = "books";
     private MutableLiveData<List<Book>> bookList;
     private FirebaseFirestore firestore;
     private StorageReference reference;
